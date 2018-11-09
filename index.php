@@ -36,15 +36,15 @@
         <div class="row h-100">
           <div class="col-12 my-auto">
             <div class="masthead-content text-white py-5 py-md-0">
-              <h1 class="mb-3">Sepengki</h1>
-              <p class="mb-5">Sistem Evaluasi Pencapaian Kinjera</p>
+              <h1 class="mb-3">SePENGKI</h1>
+              <p class="mb-5">Sistem Evaluasi Pengukuran Kinjera</p>
               <p> Login Here</p>
-              <form action="process_login.php">
+              <form action="process_login.php" method="POST">
                   <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon">
+                    <input type="email" class="form-control" name="email" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon">
                   </div>
                   <div class="form-group">
-                      <input type="password" class="form-control" placeholder="Enter Password..." aria-label="Enter Pasword...">
+                      <input type="password" class="form-control" name="password" placeholder="Enter Password..." aria-label="Enter Pasword...">
                   </div>
                   <div class="form-group">
                     <button class="btn btn-secondary" type="submit">Login</button>
