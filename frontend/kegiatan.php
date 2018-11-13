@@ -40,14 +40,14 @@
             include 'config/koneksi.php';
 
             $sql = "SELECT kegiatan.id as id, program.nama as nama_program, kegiatan.nama  as nama_kegiatan FROM kegiatan
-                    join program on program.id=kegiatan.program_id";
+                    join program on program.id=kegiatan.trxprogram_id";
             $count =0;
             if($result = mysqli_query($con, $sql)){
                 if(mysqli_num_rows($result) > 0){
                     while($row= mysqli_fetch_array($result)){
                         $id = $row['id'];
                         $nama_program = $row['nama_program'];
-                        $nama_sasaran = $row['nama_kegiatan'];
+                        $nama_kegiatan = $row['nama_kegiatan'];
 
                         $return_arr[] = array(
                             "id" => $id,
@@ -74,7 +74,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="pull-right">
-                                        <a href="create_program.php" class="btn btn-primary">Tambah Program</a>
+                                        <a href="create_kegiatan.php" class="btn btn-primary">Tambah Kegiatan</a>
                                     </div>
                                 </div>
                             </div>
@@ -89,19 +89,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
-                                            foreach($return_arr as $arr){
-                                                echo "<tr>";
-                                                echo "<td>".++$count."</td>";
-                                                echo "<td>".$arr["nama_program"]."</td>";
-                                                echo "<td>".$arr["nama_sasaran"]."</td>";
-                                                echo "<td>
-                                                        <a href='edit_kegiatan.php?kegiatan_id=".$arr["id"]."' class='btn btn-success'>Edit</a>
-                                                        <a href='add_indikator.php?kegiatan_id=".$arr["id"]."' class='btn btn-primary'>Lihat</a>
-                                                        <a href='hapus_kegiatan.php?kegiatan_id=".$arr["id"]."' class='btn btn-warning'>Hapus</a>
-                                                      </td>";
-                                                echo "</tr>";
-                                            }
+                                        <?php
+                                            if(!empty($return_arr))
+                                            {
+                                                foreach($return_arr as $arr){
+                                                    echo "<tr>";
+                                                    echo "<td>".++$count."</td>";
+                                                    echo "<td>".$arr["nama_program"]."</td>";
+                                                    echo "<td>".$arr["nama_kegiatan"]."</td>";
+                                                    echo "<td>
+                                                            <a href='edit_kegiatan.php?kegiatan_id=".$arr["id"]."' class='btn btn-success'>Edit</a>
+                                                            <a href='indikator.php?kegiatan_id=".$arr["id"]."&nama=".$arr["nama_kegiatan"]."' class='btn btn-primary'>Output</a>
+                                                            <a href='hapus_kegiatan.php?kegiatan_id=".$arr["id"]."' class='btn btn-warning'>Hapus</a>
+                                                          </td>";
+                                                    echo "</tr>";
+                                                }
+                                            } 
+                                            
                                         ?>
                                     </tbody>
                                 </table>

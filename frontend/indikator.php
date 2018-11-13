@@ -1,40 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
-    <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Menu CSS -->
-    <link href="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-    <!-- toast CSS -->
-    <link href="../plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
-    <!-- morris CSS -->
-    <link href="../plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
-    <!-- chartist CSS -->
-    <link href="../plugins/bower_components/chartist-js/dist/chartist.min.css" rel="stylesheet">
-    <link href="../plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
-    <!-- animation CSS -->
-    <link href="css/animate.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
-    <!-- color CSS -->
-    <link href="css/colors/default.css" id="theme" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-</head>
+<?php 
+    include 'config/head.php';
+?>
 
 <body class="fix-header">
     <!-- ============================================================== -->
@@ -92,38 +61,63 @@
         <!-- ============================================================== -->
         <!-- Page Content -->
         <!-- ============================================================== -->
+        <?php 
+            include 'config/koneksi.php';
+            $kegiatan_id = $_GET['kegiatan_id'];
+            $kegiatan_nama = $_GET['nama'];
+            $sql = "SELECT * FROM indikator_kegiatan where kegiatan_id=$kegiatan_id";
+            
+            $count =0;
+            if($result = mysqli_query($con, $sql)){
+                if(mysqli_num_rows($result) > 0){
+                    while($row= mysqli_fetch_array($result)){
+                        $id = $row['id'];
+                        $tolak_ukur = $row['tolak_ukur'];
+                        $satuan = $row['satuan'];
+                        $ksatu = $row['ksatu'];
+                        $rsatu = $row['rsatu'];
+                        $kdua = $row['kdua'];
+                        $rdua = $row['rdua'];
+                        $ktiga = $row['ktiga'];
+                        $rtiga = $row['rtiga'];
+                        $kempat = $row['kempat'];
+                        $rempat = $row['rempat'];
+                        $klima = $row['klima'];
+                        $rlima = $row['rlima'];
+                        $kenam = $row['kenam'];
+                        $renam = $row['renam'];
+                        $ktujuh = $row['ktujuh'];
+                        $rtujuh = $row['rtujuh'];
+
+                        $return_arr[] = array(
+                            "id" => $id,
+                            "tolak_ukur" => $tolak_ukur,
+                            "satuan" => $satuan,
+                            "ksatu" => $ksatu,
+                            "rsatu" => $rsatu,
+                            "kdua" => $kdua,
+                            "rdua" => $rdua,
+                            "ktiga" => $ktiga,
+                            "rtiga" => $rtiga,
+                            "kempat" => $kempat,
+                            "rempat" => $rempat,
+                            "klima" => $klima,
+                            "rlima" => $rlima,
+                            "kenam" => $kenam,
+                            "renam" => $renam,
+                            "ktujuh" => $ktujuh,
+                            "rtujuh" => $rtujuh
+                        );
+                    }
+                }
+            }
+        ?>
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="white-box">
-                            <h3 class="box-title">Create Kegiatan</h3>
-                            <form action="aksi/simpan_kegiatan.php" method="POST">
-                                <div class="form-group">
-                                    <label>Program</label>
-                                    <select id="program" name="program" class="form-control">
-                                        <option> --Silahkan Pilih-- </option>
-                                        <?php 
-                                            include 'config/koneksi.php';
-                                            $sql="SELECT program.id as id, program.nama as nama FROM trx_program join program on trx_program.program_id=program.id";
-                                            if($result = mysqli_query($con, $sql)){
-                                                if(mysqli_num_rows($result) > 0){
-                                                    while($row= mysqli_fetch_array($result)){
-                                                        echo "<option value='".$row['id']."'>".$row['nama']."</option>";
-                                                    }
-                                                }
-                                            }
-                                        ?>
-                                    </select>
-                                </div>
-                            
-                                <div class="form-group">
-                                    <label for="kegiatan">Kegiatan</label>
-                                    <input type="text" class="form-control" name="kegiatan" id="kegiatan">
-                                </div>
-
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                            <h3 class="box-title">Data Indikator Kegiatan: <?php echo $kegiatan_nama; ?></h3>
                         </div>
                     </div>
                 </div>
@@ -168,13 +162,6 @@
     <script src="js/dashboard1.js"></script>
     <script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#program").select2({
-                placeholder: "Please Select"
-            });
-        });
-    </script>
 </body>
 
 </html>
