@@ -68,6 +68,29 @@
         <!-- ============================================================== -->
         <!-- Page Content -->
         <!-- ============================================================== -->
+        <?php 
+            include 'config/koneksi.php';
+
+            $sql = "SELECT kegiatan.id as id, program.nama as nama_program, kegiatan.nama as nama_kegiatan FROM kegiatan
+                    join program on program.id=kegiatan.program_id";
+            $count =0;
+            if($result = mysqli_query($con, $sql)){
+                if(mysqli_num_rows($result) > 0){
+                    while($row= mysqli_fetch_array($result)){
+                        $id = $row['id'];
+                        $nama_program = $row['nama_program'];
+                        $nama_kegiatan = $row['nama_kegiatan'];
+        
+                        $return_arr[] = array(
+                            "id" => $id,
+                            "nama_program" => $nama_program,
+                            "nama_kegiatan" => $nama_kegiatan
+                        );
+                    }
+                }
+            }
+        ?>
+
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -75,9 +98,45 @@
                         <div class="white-box">
                             <h3 class="box-title">Data Kegiatan</h3>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-right">
+                                    <a href="create_program.php" class="btn btn-primary">Tambah Program</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Program</th>
+                                <th>Kegiatan</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                if($return_arr.length()>0){ 
+                                    foreach($return_arr as $arr){
+                                        echo "<tr>";
+                                        echo "<td>".++$count."</td>";
+                                        echo "<td>".$arr["nama_program"]."</td>";
+                                        echo "<td>".$arr["nama_kegiatan"]."</td>";
+                                        echo "<td>
+                                                <a href='edit_kegiatan.php?trx_kegiatan_id=".$arr["id"]."' class='btn btn-success'>Edit</a>
+                                                <a href='create_indikator.php?trx_kegiatan_id=".$arr["id"]."' class='btn btn-primary'>Lihat</a>
+                                                <a href='hapus_kegiatan.php?trx_kegiatan_id=".$arr["id"]."' class='btn btn-warning'>Hapus</a>
+                                                </td>";
+                                        echo "</tr>";
+                                    }
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <!-- /.container-fluid -->
             <footer class="footer text-center"> 2017 &copy; Ample Admin brought to you by wrappixel.com </footer>
@@ -86,10 +145,6 @@
         <!-- End Page Content -->
         <!-- ============================================================== -->
     </div>
-    <?php 
-        include 'config/koneksi.php';
-
-    ?>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
