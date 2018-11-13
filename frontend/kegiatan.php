@@ -1,40 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
-    <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Menu CSS -->
-    <link href="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-    <!-- toast CSS -->
-    <link href="../plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
-    <!-- morris CSS -->
-    <link href="../plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
-    <!-- chartist CSS -->
-    <link href="../plugins/bower_components/chartist-js/dist/chartist.min.css" rel="stylesheet">
-    <link href="../plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
-    <!-- animation CSS -->
-    <link href="css/animate.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
-    <!-- color CSS -->
-    <link href="css/colors/default.css" id="theme" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-</head>
+<?php include 'config/head.php' ?>
 
 <body class="fix-header">
     <!-- ============================================================== -->
@@ -72,27 +39,20 @@
         <?php 
             include 'config/koneksi.php';
 
-            $sql = "SELECT trx_program.id as id, program.nama as nama_program, indikator_sasaran.nama as nama_sasaran, trx_program.ksatu as ksatu,  trx_program.kdua as kdua, trx_program.ktiga as ktiga FROM trx_program
-                    join program on program.id=trx_program.program_id
-                    join indikator_sasaran on indikator_sasaran.id=trx_program.indikator_id";
+            $sql = "SELECT kegiatan.id as id, program.nama as nama_program, kegiatan.nama  as nama_kegiatan FROM kegiatan
+                    join program on program.id=kegiatan.program_id";
             $count =0;
             if($result = mysqli_query($con, $sql)){
                 if(mysqli_num_rows($result) > 0){
                     while($row= mysqli_fetch_array($result)){
                         $id = $row['id'];
                         $nama_program = $row['nama_program'];
-                        $nama_sasaran = $row['nama_sasaran'];
-                        $ksatu = $row['ksatu'];
-                        $kdua = $row['kdua'];
-                        $ktiga = $row['ktiga'];
-        
+                        $nama_sasaran = $row['nama_kegiatan'];
+
                         $return_arr[] = array(
                             "id" => $id,
                             "nama_program" => $nama_program,
-                            "nama_sasaran" => $nama_sasaran,
-                            "ksatu" => $ksatu,
-                            "kdua" => $kdua,
-                            "ktiga" => $ktiga
+                            "nama_kegiatan" => $nama_kegiatan
                         );
                     }
                 }
@@ -104,7 +64,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="white-box">
-                            <h3 class="box-title">Data Program</h3>
+                            <h3 class="box-title">Data Kegiatan</h3>
                         </div>
                     </div>
                 </div>
@@ -124,10 +84,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Program</th>
-                                            <th>Indikator Program</th>
-                                            <th>Target RPJMD 2016-2021</th>
-                                            <th>Realisasi RKPD Tahun Lalu</th>
-                                            <th>Target Kinerja RKPD Berjalan</th>
+                                            <th>Kegiatan</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -138,13 +95,10 @@
                                                 echo "<td>".++$count."</td>";
                                                 echo "<td>".$arr["nama_program"]."</td>";
                                                 echo "<td>".$arr["nama_sasaran"]."</td>";
-                                                echo "<td>".$arr["ksatu"]."%</td>";
-                                                echo "<td>".$arr["kdua"]."%</td>";
-                                                echo "<td>".$arr["ktiga"]."%</td>";
                                                 echo "<td>
-                                                        <a href='edit_program.php?trx_program_id=".$arr["id"]."' class='btn btn-success'>Edit</a>
-                                                        <a href='lihat_program.php?trx_program_id=".$arr["id"]."' class='btn btn-primary'>Lihat</a>
-                                                        <a href='hapus_program.php?trx_program_id=".$arr["id"]."' class='btn btn-warning'>Hapus</a>
+                                                        <a href='edit_kegiatan.php?kegiatan_id=".$arr["id"]."' class='btn btn-success'>Edit</a>
+                                                        <a href='add_indikator.php?kegiatan_id=".$arr["id"]."' class='btn btn-primary'>Lihat</a>
+                                                        <a href='hapus_kegiatan.php?kegiatan_id=".$arr["id"]."' class='btn btn-warning'>Hapus</a>
                                                       </td>";
                                                 echo "</tr>";
                                             }
