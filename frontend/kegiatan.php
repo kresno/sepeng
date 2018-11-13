@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
-    <title>SePENGKI</title>
+    <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
     <!-- Bootstrap Core CSS -->
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
@@ -25,6 +26,8 @@
     <link href="css/style.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="css/colors/default.css" id="theme" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -32,6 +35,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+
 <body class="fix-header">
     <!-- ============================================================== -->
     <!-- Preloader -->
@@ -48,15 +52,15 @@
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-        <!-- ============================================================== -->
         <?php
         include 'config/navbar.php';
         ?>
+        <!-- End Top Navigation -->
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->    
+        <!-- ============================================================== -->
         <?php 
-            include 'config/sidebar.php';
+            include 'config/sidebar.php'
         ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar -->
@@ -64,23 +68,31 @@
         <!-- ============================================================== -->
         <!-- Page Content -->
         <!-- ============================================================== -->
+
         <?php 
             include 'config/koneksi.php';
 
-            $sql = "SELECT kegiatan.id as id, program.nama as nama_program, kegiatan.nama as nama_kegiatan FROM kegiatan
-                    join program on program.id=kegiatan.program_id";
+            $sql = "SELECT trx_program.id as id, program.nama as nama_program, indikator_sasaran.nama as nama_sasaran, trx_program.ksatu as ksatu,  trx_program.kdua as kdua, trx_program.ktiga as ktiga FROM trx_program
+                    join program on program.id=trx_program.program_id
+                    join indikator_sasaran on indikator_sasaran.id=trx_program.indikator_id";
             $count =0;
             if($result = mysqli_query($con, $sql)){
                 if(mysqli_num_rows($result) > 0){
                     while($row= mysqli_fetch_array($result)){
                         $id = $row['id'];
                         $nama_program = $row['nama_program'];
-                        $nama_kegiatan = $row['nama_kegiatan'];
+                        $nama_sasaran = $row['nama_sasaran'];
+                        $ksatu = $row['ksatu'];
+                        $kdua = $row['kdua'];
+                        $ktiga = $row['ktiga'];
         
                         $return_arr[] = array(
                             "id" => $id,
                             "nama_program" => $nama_program,
-                            "nama_kegiatan" => $nama_kegiatan
+                            "nama_sasaran" => $nama_sasaran,
+                            "ksatu" => $ksatu,
+                            "kdua" => $kdua,
+                            "ktiga" => $ktiga
                         );
                     }
                 }
@@ -92,47 +104,59 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="white-box">
-                            <h3 class="box-title">Data Kegiatan</h3>
+                            <h3 class="box-title">Data Program</h3>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="pull-right">
-                                    <a href="create_program.php" class="btn btn-primary">Tambah Program</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <a href="create_program.php" class="btn btn-primary">Tambah Program</a>
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Program</th>
+                                            <th>Indikator Program</th>
+                                            <th>Target RPJMD 2016-2021</th>
+                                            <th>Realisasi RKPD Tahun Lalu</th>
+                                            <th>Target Kinerja RKPD Berjalan</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php 
+                                            foreach($return_arr as $arr){
+                                                echo "<tr>";
+                                                echo "<td>".++$count."</td>";
+                                                echo "<td>".$arr["nama_program"]."</td>";
+                                                echo "<td>".$arr["nama_sasaran"]."</td>";
+                                                echo "<td>".$arr["ksatu"]."%</td>";
+                                                echo "<td>".$arr["kdua"]."%</td>";
+                                                echo "<td>".$arr["ktiga"]."%</td>";
+                                                echo "<td>
+                                                        <a href='edit_program.php?trx_program_id=".$arr["id"]."' class='btn btn-success'>Edit</a>
+                                                        <a href='lihat_program.php?trx_program_id=".$arr["id"]."' class='btn btn-primary'>Lihat</a>
+                                                        <a href='hapus_program.php?trx_program_id=".$arr["id"]."' class='btn btn-warning'>Hapus</a>
+                                                      </td>";
+                                                echo "</tr>";
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Program</th>
-                                <th>Kegiatan</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                if($return_arr.length()>0){ 
-                                    foreach($return_arr as $arr){
-                                        echo "<tr>";
-                                        echo "<td>".++$count."</td>";
-                                        echo "<td>".$arr["nama_program"]."</td>";
-                                        echo "<td>".$arr["nama_kegiatan"]."</td>";
-                                        echo "<td>
-                                                <a href='edit_kegiatan.php?trx_kegiatan_id=".$arr["id"]."' class='btn btn-success'>Edit</a>
-                                                <a href='create_indikator.php?trx_kegiatan_id=".$arr["id"]."' class='btn btn-primary'>Lihat</a>
-                                                <a href='hapus_kegiatan.php?trx_kegiatan_id=".$arr["id"]."' class='btn btn-warning'>Hapus</a>
-                                                </td>";
-                                        echo "</tr>";
-                                    }
-                                }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+                <!-- /.row -->
+                
             </div>
             <!-- /.container-fluid -->
             <footer class="footer text-center"> 2017 &copy; Ample Admin brought to you by wrappixel.com </footer>
@@ -168,6 +192,7 @@
     <script src="js/custom.min.js"></script>
     <script src="js/dashboard1.js"></script>
     <script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 </body>
 
 </html>
