@@ -135,17 +135,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="ksatu">Target RPJMD 2016-2021</label>
+                                    <label for="ksatu">Target RPJMD 2016-2021(%)</label>
                                     <input type="number" class="form-control" name="ksatu" id="ksatu">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="kdua">Realisasi Capaian Kinerja RPJMD s/d RKPD Tahun Lalu (n-2)</label>
+                                    <label for="kdua">Realisasi Capaian Kinerja RPJMD s/d RKPD Tahun Lalu (n-2)(%)</label>
                                     <input type="number" class="form-control" name="kdua" id="kdua">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="kdua">Target Kinerja dan Anggaran RKPD Tahun berjalan (tahun n-1) yang dievaluasi</label>
+                                    <label for="kdua">Target Kinerja dan Anggaran RKPD Tahun berjalan (tahun n-1) yang dievaluasi(%)</label>
                                     <input type="number" class="form-control" name="ktiga" id="ktiga">
                                 </div>
 
