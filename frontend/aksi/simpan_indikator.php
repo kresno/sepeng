@@ -2,6 +2,7 @@
 include '../config/koneksi.php';
 
 $kegiatan_id = $_POST['kegiatan_id'];
+$tolak_ukur = $_POST['tolak_ukur'];
 $satuan = $_POST['satuan'];
 $ksatu = $_POST['ksatu'];
 $rsatu = $_POST['rsatu'];
@@ -22,7 +23,7 @@ $sql = "INSERT INTO indikator_kegiatan(kegiatan_id, satuan, ksatu, rsatu, kdua, 
 if (!mysqli_query($con,$sql)) {
     die('Error: ' . mysqli_error($con));
 }else{
-    echo "<script>alert('Data Berhasil di Simpan'); window.location.href='../indikator.php';</script>";
+    echo "<script>alert('Data Berhasil di Simpan'); window.location.href='../kegiatan.php';</script>";
 }
 
 ?>

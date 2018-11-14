@@ -121,7 +121,83 @@
                         </div>
                     </div>
                 </div>
-                
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <a href="create_indikator.php?kegiatan_id=<?php echo $kegiatan_id; ?>" class="btn btn-primary">Tambah Indikator</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr style="height: 22px;">
+                                        <td style="height: 66px; width: 237px;" rowspan="3" align="center">Indikator Kinerja Program (Outcome)/Kegiatan (Output)</td>
+                                        <td style="height: 44px; width: 44px;" colspan="3" rowspan="2" align="center">Target RPJMD pada Tahun 2016 s/d 2021 (Periode RPJMD)</td>
+                                        <td style="height: 44px; width: 30px;" colspan="2" rowspan="2" align="center">Realisasi Capaian Kinerja RPJMD s/d RKPD Tahun Lalu (n-2) </td>
+                                        <td style="height: 44px; width: 30px;" colspan="2" rowspan="2" align="center">Target Kinerja dan Anggaran RKPD Tahun berjalan (tahun n-1) yang dievaluasi</td>
+                                        <td style="height: 22px; width: 120px;" colspan="8" align="center">Realisasi Kinerja Pada Triwulan</td>
+                                    </tr>
+                                    <tr style="height: 22px;">
+                                        <td style="height: 22px; width: 30px;" colspan="2" align="center">I</td>
+                                        <td style="height: 22px; width: 30px;" colspan="2" align="center">II</td>
+                                        <td style="height: 22px; width: 30px;" colspan="2" align="center">III</td>
+                                        <td style="height: 22px; width: 30px;" colspan="2" align="center">IV</td>
+                                    </tr>
+                                    <tr style="height: 22px;">
+                                        <td style="height: 22px; width: 30px;" align="center">K</td>
+                                        <td style="height: 22px; width: 30px;" align="center">Satuan</td>
+                                        <td style="height: 22px; width: 14px;" align="center">Rp. (000)</td>
+                                        <td style="height: 22px; width: 15px;" align="center">K</td>
+                                        <td style="height: 22px; width: 15px;" align="center">Rp. (000)</td>
+                                        <td style="height: 22px; width: 15px;" align="center">K</td>
+                                        <td style="height: 22px; width: 15px;" align="center">Rp. (000)</td>
+                                        <td style="height: 22px; width: 15px;" align="center">K</td>
+                                        <td style="height: 22px; width: 15px;" align="center">Rp. (000)</td>
+                                        <td style="height: 22px; width: 15px;" align="center">K</td>
+                                        <td style="height: 22px; width: 15px;" align="center">Rp. (000)</td>
+                                        <td style="height: 22px; width: 15px;" align="center">K</td>
+                                        <td style="height: 22px; width: 15px;" align="center">Rp. (000)</td>
+                                        <td style="height: 22px; width: 15px;" align="center">K</td>
+                                        <td style="height: 22px; width: 15px;" align="center">Rp. (000)</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            if(!empty($return_arr))
+                                            {
+                                                foreach($return_arr as $arr){
+                                                    echo "<tr>";
+                                                    echo "<td align='left'>".$arr["tolak_ukur"]."</td>";
+                                                    echo "<td align='right'>".$arr["ksatu"]."</td>";
+                                                    echo "<td align='left'>".$arr["satuan"]."</td>";
+                                                    echo "<td align='right'>".number_format($arr["rsatu"]/1000)."</td>";
+                                                    echo "<td align='right'>".$arr["kdua"]."</td>";
+                                                    echo "<td align='right'>".number_format($arr["rdua"]/1000)."</td>";
+                                                    echo "<td align='right'>".$arr["ktiga"]."</td>";
+                                                    echo "<td align='right'>".number_format($arr["rtiga"]/1000)."</td>";
+                                                    echo "<td align='right'>".$arr["kempat"]."</td>";
+                                                    echo "<td align='right'>".number_format($arr["rempat"]/1000)."</td>";
+                                                    echo "<td align='right'>".$arr["klima"]."</td>";
+                                                    echo "<td align='right'>".number_format($arr["rlima"]/1000)."</td>";
+                                                    echo "<td align='right'>".$arr["kenam"]."</td>";
+                                                    echo "<td align='right'>".number_format($arr["renam"]/1000)."</td>";
+                                                    echo "<td align='right'>".$arr["ktujuh"]."</td>";
+                                                    echo "<td align='right'>".number_format($arr["rtujuh"]/1000)."</td>";
+                                                    echo "</tr>";
+                                                }
+                                            } 
+                                            
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.container-fluid -->
             <footer class="footer text-center"> 2017 &copy; Ample Admin brought to you by wrappixel.com </footer>

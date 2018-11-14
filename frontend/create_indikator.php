@@ -74,7 +74,7 @@
                         <a class="profile-pic" href="#"> <img src="../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Steave</b></a>
                     </li>
                 </ul>
-            </div>
+            </div> 
             <!-- /.navbar-header -->
             <!-- /.navbar-top-links -->
             <!-- /.navbar-static-side -->
@@ -99,11 +99,93 @@
                         <div class="white-box">
                             <h3 class="box-title">Create Output Kegiatan</h3>
                         </div>
+
+                         <form action="aksi/simpan_indikator.php" method="POST">
+                            <input type="hidden" name="kegiatan_id" value='<?php echo $_GET['kegiatan_id']; ?>'>
+
+                            <div class="form-group">
+                                <label for="tolak_ukur">Tolak Ukur</label>
+                                <input type="text" class="form-control" name="tolak_ukur" id="tolak_ukur">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="satuan">Satuan</label>
+                                <input type="text" class="form-control" name="satuan" id="satuan">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ksatu">Target RPJMD</label>
+                                <input type="number" class="form-control" name="ksatu" id="ksatu">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rsatu">Pagu RPJMD</label>
+                                <input type="number" class="form-control" name="rsatu" id="rsatu">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kdua">Target Realisasi Capaian Kinerja RPJMD s/d RKPD Tahun Lalu (n-2) </label>
+                                <input type="number" class="form-control" name="kdua" id="kdua">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rdua">Pagu Realisasi Capaian Kinerja RPJMD s/d RKPD Tahun Lalu (n-2) </label>
+                                <input type="number" class="form-control" name="rdua" id="rdua">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ktiga">Target Kinerja dan Anggaran RKPD Tahun berjalan (tahun n-1) yang dievaluasi</label>
+                                <input type="number" class="form-control" name="ktiga" id="ktiga">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rtiga">Pagu Kinerja dan Anggaran RKPD Tahun berjalan (tahun n-1) yang dievaluasi</label>
+                                <input type="number" class="form-control" name="rtiga" id="rtiga">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kempat">Target Realisasi Kinerja Pada Triwulan I</label>
+                                <input type="number" class="form-control" name="kempat" id="kempat">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rempat">Pagu Realisasi Kinerja Pada Triwulan I</label>
+                                <input type="number" class="form-control" name="rempat" id="rempat">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="klima">Target Realisasi Kinerja Pada Triwulan II</label>
+                                <input type="number" class="form-control" name="klima" id="klima">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rlima">Pagu Realisasi Kinerja Pada Triwulan II</label>
+                                <input type="number" class="form-control" name="rlima" id="rlima">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kenam">Target Realisasi Kinerja Pada Triwulan III</label>
+                                <input type="number" class="form-control" name="kenam" id="kenam">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="renam">Pagu Realisasi Kinerja Pada Triwulan III</label>
+                                <input type="number" class="form-control" name="renam" id="renam">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ktujuh">Target Realisasi Kinerja Pada Triwulan IV</label>
+                                <input type="number" class="form-control" name="ktujuh" id="ktujuh">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rtujuh">Pagu Realisasi Kinerja Pada Triwulan IV</label>
+                                <input type="number" class="form-control" name="rtujuh" id="rtujuh">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
                     </div>
                 </div>
-                <form action="aksi/simpan_indikator" method="POST">
-
-                </form>
             </div>
             <!-- /.container-fluid -->
             <footer class="footer text-center"> 2017 &copy; Ample Admin brought to you by wrappixel.com </footer>
