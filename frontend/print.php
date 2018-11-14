@@ -63,8 +63,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="white-box">
-                            
+                        <div class="white-box">       
                             <iframe src="../layout.php" frameborder="0" allowfullscreen style="width:100%;height:600px;"></iframe>
                         </div>
                     </div>

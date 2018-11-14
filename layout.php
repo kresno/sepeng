@@ -12,7 +12,8 @@
         }
     </style>
     <body>
-        <button id="btnExport" onclick="fnExcelReport();"> EXPORT </button>
+        <a href="download/bappeda.xlsx" download>Download</a>
+    <!-- <button id="btnExport" onclick="fnExcelReport();"> EXPORT </button> -->
         <table style="border-color: #fff;" border="1" id="tableData">      
             <thead>
                 <tr style="height: 22px;">
